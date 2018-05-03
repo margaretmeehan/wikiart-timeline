@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import HorizontalTimeline from 'react-horizontal-timeline';
+import './main.css';
+
 var _ = require('lodash');
 var famous_paintings = require('./famous_paintings.json');
 
@@ -25,15 +27,12 @@ class ArtistInfo extends Component {
     render(){
         let painting = this.state.paintingObject;
         // let paintingDetails = _.filter(famous_paintings, function(o) { return o.url == painting.url});
-        var imgStyle = {
-            'maxWidth': '700px',
-            'maxHeight': '600px',
-          };
+
         return( //description
             <div>
                 <h2>{painting.title}</h2>
                 <p>This piece is of the style {painting.style}.</p>
-                <img className="painting" src={painting.image} style={imgStyle}/>
+                <img className="painting" src={painting.image}/>
             </div>
         )
     }

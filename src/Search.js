@@ -4,7 +4,8 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import Timeline from './Timeline';
 import ArtistInfo from './ArtistInfo';
-import './index.css';
+import './main.css';
+import { ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 
 class Search extends Component {
   constructor(props, context) {
@@ -15,11 +16,17 @@ class Search extends Component {
       searchable: true,
       clearable: false,
       selectValue: '',
-			rtl: false,
+      rtl: false,
+      toggleValue: 1
     };
     this.updateValue = this.updateValue.bind(this);
     this.clearValue = this.clearValue.bind(this);
+    this.handleToggleChange = this.handleToggleChange.bind(this);
   }
+
+  handleToggleChange(e) {
+    this.setState({ toggleValue: e });
+  };
 
   clearValue (e) {
 		this.select.setInputValue('');
@@ -55,22 +62,10 @@ class Search extends Component {
       { value: 'edward-hopper', label: 'Edward Hopper'}, { value: 'wassily-kandinsky', label: 'Wassily Kandinsky'}, { value: 'pablo-picasso', label: 'Jan Vermeer'}, { value: 'pablo-picasso', label: 'Paul Klee'}, { value: 'pablo-picasso', label: 'Edvard Munch'}, { value: 'pablo-picasso', label: 'Goya'}, 
       { value: 'janet-fish', label: 'Janet Fish'}, { value: 'edouard-manet', label: 'Edouard Manet'}
   ];
-  var divStyle = {
-    searchSection: {
-      'width': '80%',
-      'marginLeft': '20px',
-    },
-    searchHeading: {
-      'float':'left'
-    },
-    searchType: {
-      'float':'right'
-    },
-  };
 
     return ( 
-      <div className="search-section" style={divStyle.searchSection}>
-        <h3 className="search-heading" style={divStyle.searchHeading}>search an artist </h3>
+      <div className="search-section">
+        <h3 className="search-heading">search an artist </h3>
         <Select
 					id="state-select"
 					ref={(ref) => { this.select = ref; }}
@@ -87,7 +82,17 @@ class Search extends Component {
 					rtl={this.state.rtl}
           searchable={this.state.searchable}
 				/>
-        {hasSelected && <Timeline selectedValue={this.state.selectValue}/>}
+        <ButtonToolbar>
+          <ToggleButtonGroup type="radio" name="options" 
+              defaultValue={1} 
+              onChange={this.handleToggleChange}
+              >
+              <ToggleButton value={1}> See Samples from Oeuvre</ToggleButton>
+              <ToggleButton value={2}> See Popular Artworks </ToggleButton>
+          </ToggleButtonGroup>
+        </ButtonToolbar>
+
+        {hasSelected && <Timeline selectedValue={this.state.selectValue} toggleValue={this.state.toggleValue}/>}
         {/* {hasSelected && <ArtistInfo/>} */}
       </div>
     );

@@ -1,0 +1,22 @@
+.Select {
+    width: 50%;
+    display:block;
+    float: left;
+}
+.search-section {
+    width: 80%;
+    margin-left: 20px;
+}
+
+.btn-toolbar{
+    display:block;  
+}
+
+.artistDetails {
+    margin-top: 25px;
+}
+
+.painting {
+    max-width: 700px;
+    max-height: 600px;
+}
