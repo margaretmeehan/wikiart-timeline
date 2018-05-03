@@ -1,3 +1,7 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
 .Select {
     width: 50%;
     display:block;
@@ -6,6 +10,8 @@
 .search-section {
     width: 80%;
     margin-left: 20px;
+    position: relative;
+    margin-bottom: 70px;
 }
 
 .btn-toolbar{
@@ -19,4 +25,15 @@
 .painting {
     max-width: 700px;
     max-height: 600px;
+}
+
+.pagefooter {
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+}
+.pagefooter p {
+    color: grey;
+    font-size: 11px;
+    padding: 0px 10px 0px 10px;
 }

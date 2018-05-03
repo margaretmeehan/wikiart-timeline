@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Search from './Search'; // Import a component from another file
+import Footer from './Footer';
+import './main.css';
 
 const App = () => (
   <Router>
@@ -15,12 +17,18 @@ const App = () => (
       </ul>
 
       <hr /> */}
-      <Route exact path="/" component={Search} />
+      <Route exact path="/" component={Home} />
       <Route path="/artists" component={Artists} />
     </div>
   </Router>
 );
 
+const Home = ({ match }) => (
+  <div>
+    <Search />
+    <Footer />
+  </div>
+);
 const Artists = ({ match }) => (
   <div>
     <h2>Artists</h2>
