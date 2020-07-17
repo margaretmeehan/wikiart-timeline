@@ -7,8 +7,9 @@ html {
     display:block;
     float: left;
 }
+
 .search-section {
-    width: 80%;
+    width: 90%;
     margin-left: 20px;
     position: relative;
     margin-bottom: 70px;
@@ -18,8 +19,27 @@ html {
     display:block;  
 }
 
+.btn-default {
+    border-color: white;
+    background-color: white;
+}
+
+.btn {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.btn.active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: white;
+}
+
 .artistDetails {
     margin-top: 25px;
+    text-align: left;
 }
 
 .painting {
@@ -27,13 +47,37 @@ html {
     max-height: 600px;
 }
 
+.paintingDescription {
+    border: 1px solid;
+    /* max-width: 800px; */
+    padding: 20px;
+    text-align: left;
+    margin-left: 10px;
+}
+
 .pagefooter {
     position: absolute;
     bottom: 0;
-    width: 95%;
+    width: 100%;
 }
+
 .pagefooter p {
-    color: grey;
+    color: black;
     font-size: 11px;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 0px 0px 10px;
+}
+
+#root > div > div > div.search-section > div:nth-child(4) > div:nth-child(2) > div > div > ul:nth-child(2) > li:nth-child(1),
+#root > div > div > div.search-section > div:nth-child(4) > div:nth-child(2) > div > div > ul:nth-child(2) > li:nth-child(2) 
+{
+    background-image: none !important;
+} 
+
+div.search-section ul.buttons > li.button-back, div.search-section ul.buttons > li.button-forward {
+    border: 0px !important;
+    background-color: #8AA893;
+}
+
+div.search-section ul.buttons > li.button-back > svg, div.search-section ul.buttons > li.button-forward > svg {
+    fill:white !important;
 }

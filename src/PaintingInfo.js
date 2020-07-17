@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import HorizontalTimeline from 'react-horizontal-timeline';
 import './main.css';
-
-var _ = require('lodash');
-var famous_paintings = require('./famous_paintings.json');
 
 class PaintingInfo extends Component {
     constructor(props, context) {
@@ -16,7 +11,7 @@ class PaintingInfo extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        if (prevState.paintingObject != nextProps.paintingObject){
+        if (prevState.paintingObject !== nextProps.paintingObject){
             return {
                 paintingObject: nextProps.paintingObject,
             };
@@ -28,14 +23,14 @@ class PaintingInfo extends Component {
 
     render(){
         let painting = this.state.paintingObject;
-        let isPopular = this.props.timelineType == 2 ? true : false;
+        let isPopular = this.props.timelineType === 2 ? true : false;
 
         return(
             <div>
                 <h2>{painting.title}</h2>
-                <img className="painting" src={painting.image}/>
+                <img className="painting" src={painting.image} alt={painting.title}/>
                 <p><i>{painting.style}</i></p>
-                <p>{isPopular && painting.description}</p>
+                {isPopular && <p className="paintingDescription"> {painting.description} </p>}
             </div>
         )
     }

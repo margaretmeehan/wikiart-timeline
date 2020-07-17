@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import HorizontalTimeline from 'react-horizontal-timeline';
-import PaintingInfo from './PaintingInfo'; // Import a component from another file
+import PaintingInfo from './PaintingInfo';
 import './main.css';
 
 var _ = require('lodash');
-var famous_artists = require('./famous_artists.json'); //(with path)
+var artists = require('./data/artists.json');
 
 class Timeline extends Component {
     constructor(props, context) {
@@ -21,14 +20,14 @@ class Timeline extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState){
         if (prevState.artistObject == null){
-            let artist = _.filter(famous_artists, function(o) { return o.url == nextProps.selectedValue});
+            let artist = _.filter(artists, function(o) { return o.url === nextProps.selectedValue});
             return {
                 artistObject: artist
             }
         }
 
-        if (prevState.selectedArtist != nextProps.selectedValue){
-            let artist = _.filter(famous_artists, function(o) { return o.url == nextProps.selectedValue});
+        if (prevState.selectedArtist !== nextProps.selectedValue){
+            let artist = _.filter(artists, function(o) { return o.url === nextProps.selectedValue});
             return {
                 selectedArtist: nextProps.selectedValue,
                 artistObject: artist
@@ -46,9 +45,10 @@ class Timeline extends Component {
         let popularPaintings = artistInformation.popularPaintings;
         const popularPaintingDateRange = _.map(popularPaintings, function (o) { return o.yearAsString});
         let cleanedPopular = _.compact(popularPaintingDateRange);
-        
-        let isRangeTimeline = this.props.toggleValue == 1 ? true : false;
-        return(
+        let works = this.props.toggleValue === 1 ? cleanedRange : cleanedPopular;
+        let paintingObject = this.props.toggleValue === 1 ? rangePaintings[this.state.value] : popularPaintings[this.state.value];
+
+        return (
             <div>
                 <div className="artistDetails">
                     <hr></hr>
@@ -57,7 +57,8 @@ class Timeline extends Component {
                 {/* Bounding box for the Timeline */}
                 <div style={{ width: '80%', height: '120px', margin: '0 auto' }}>
                 
-                {isRangeTimeline && <HorizontalTimeline
+                <HorizontalTimeline
+                    className="timeline"
                     index={this.state.value}
                     indexClick={(index) => {
                         this.setState({ 
@@ -66,22 +67,11 @@ class Timeline extends Component {
                         });
                     }}
                     getLabel={(label) => { return label; }}
-                    values={ cleanedRange } />}
+                    values={ works } />
                 
-                {!isRangeTimeline && <HorizontalTimeline
-                    index={this.state.value}
-                    indexClick={(index) => {
-                        this.setState({ 
-                            value: index, 
-                            previous: this.state.value 
-                        });
-                    }}
-                    getLabel={(label) => { return label; }}
-                    values={ cleanedPopular } />}
                 </div>
                 <div className='text-center'>
-                    {isRangeTimeline && <PaintingInfo paintingObject={rangePaintings[this.state.value]} timelineType={this.props.toggleValue}/>}
-                    {!isRangeTimeline && <PaintingInfo paintingObject={popularPaintings[this.state.value]} timelineType={this.props.toggleValue}/>}
+                    <PaintingInfo paintingObject={paintingObject} timelineType={this.props.toggleValue}/>
                 </div>
             </div>
         )

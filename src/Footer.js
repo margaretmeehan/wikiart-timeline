@@ -6,7 +6,7 @@ class Footer extends Component {
         return (
             <div className="pagefooter">
                 <hr />
-                <p>Data courtesy of wikiart.org.</p>
+                <p>thanks to wikiart.org</p>
             </div>
         )
     }

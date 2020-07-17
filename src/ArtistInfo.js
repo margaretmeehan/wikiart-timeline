@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import HorizontalTimeline from 'react-horizontal-timeline';
 import './main.css';
-
-var _ = require('lodash');
-var famous_paintings = require('./famous_paintings.json');
 
 class ArtistInfo extends Component {
     constructor(props, context) {
@@ -15,7 +10,7 @@ class ArtistInfo extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        if (prevState.paintingObject != nextProps.paintingObject){
+        if (prevState.paintingObject !== nextProps.paintingObject){
             return {
                 paintingObject: nextProps.paintingObject,
             };
@@ -26,13 +21,12 @@ class ArtistInfo extends Component {
 
     render(){
         let painting = this.state.paintingObject;
-        // let paintingDetails = _.filter(famous_paintings, function(o) { return o.url == painting.url});
 
-        return( //description
+        return(
             <div>
                 <h2>{painting.title}</h2>
                 <p>This piece is of the style {painting.style}.</p>
-                <img className="painting" src={painting.image}/>
+                <img className="painting" src={painting.image} alt={painting.title}/>
             </div>
         )
     }
